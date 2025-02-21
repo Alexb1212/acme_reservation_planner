@@ -42,4 +42,22 @@ const createTables = async () => {
   }
 };
 
+const syncAndSeed = async() => {
+  await client.connect();
+  console.log('CONNECTED TO THE DB');
+
+  console.log('DROPPING TABLES');
+  await dropTables();
+  console.log('TABLES DROPPED');
+
+  console.log(`ADDING TABLES`);
+  await createTables();
+  console.log('TABLES ADDED');
+
+  await client.end();
+  console.log('DISCONNECTED FROM THE DB')
+}
+
+syncAndSeed();
+
 module.exports = { createTables, dropTables };
